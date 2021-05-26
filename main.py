@@ -37,7 +37,7 @@ def kill_socket():
 
 def connect():
     s = socket.socket()  # 创建 socket 对象
-    host = "192.168.10.53"  # 获取本地主机名
+    host = "0.0.0.0"  # 获取本地主机名
     port = 6666  # 设置端口
     s.bind((host, port))  # 绑定端口
     s.listen(1)  # 等待客户端连接
@@ -75,12 +75,16 @@ def open_door_test():
 app = Flask(__name__)
 c = connect()
 qos = 1
+User_admin = ['qqbot', '任意添加']
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    open_door_test()
-    return render_template('index.html')
+    if request.args.get('user') in User_admin:
+        open_door_test()
+        return render_template('index.html')
+    else:
+        return render_template('bad.html')
 
 
 if __name__ == "__main__":
