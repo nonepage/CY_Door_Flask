@@ -79,9 +79,9 @@ class myThread(threading.Thread):
         self.name = name
 
     def run(self):
-        print("开始线程：" + self.name)
+        print('心跳包开始')
         test_connect()
-        print("退出线程：" + self.name)
+        print("心跳包结束")
 
 
 def test_connect():
@@ -92,7 +92,7 @@ def test_connect():
     while True:
         if qos == 1:
             try:
-                print('心跳包')
+
                 c.send(bytes.fromhex(a1))
                 time.sleep(0.5)
                 c.send(bytes.fromhex(a1))
