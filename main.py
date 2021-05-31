@@ -4,6 +4,7 @@ from flask import render_template
 from flask import request
 import time
 import threading
+import datetime
 
 
 def send_to_open():
@@ -114,16 +115,19 @@ def test_connect():
 app = Flask(__name__)
 c = connect()
 qos = 1
-User_admin = ['qqbot', '1007800006', '2200475850', '1821269010', '1005944615', '1038888008', 'hardware']
+User_admin = ['1639356123', 'qqbot', '1007800006', '2200475850', '1821269010', '1005944615', '1038888008', 'hardware']
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.args.get('user') in User_admin:
-        open_door_test()
-        return render_template('index.html')
-    else:
-        return render_template('bad.html')
+    if datetime.datetime.now().hour > 7:
+        if request.args.get('user') in User_admin:
+            open_door_test()
+            return render_template('index.html')
+        else:
+            return render_template('bad.html')
+
+    return render_template('time_lay.html')
 
 
 thread1 = myThread(1, "Thread-1")
