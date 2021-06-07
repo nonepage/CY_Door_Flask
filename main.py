@@ -88,28 +88,13 @@ class myThread(threading.Thread):
 def test_connect():
     global c
     global qos
-    a1 = "01 0F 00 00 00 04 01 00 3E 96"
 
     while True:
         if qos == 1:
-            try:
+            kill_socket()
+            c = connect()
+            time.sleep(600)
 
-                c.send(bytes.fromhex(a1))
-                time.sleep(0.5)
-                c.send(bytes.fromhex(a1))
-                time.sleep(0.5)
-                c.send(bytes.fromhex(a1))
-                time.sleep(0.5)
-                c.send(bytes.fromhex(a1))
-                time.sleep(0.5)
-                time.sleep(600)
-            except:
-                print('关闭了正在占线的链接！')
-                kill_socket()
-                print('关闭实例')
-
-                c = connect()
-                print('新建实例')
 
 
 app = Flask(__name__)
