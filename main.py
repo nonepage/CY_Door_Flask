@@ -42,6 +42,7 @@ def connect():
     port = 6666  # 设置端口
     s.bind((host, port))  # 绑定端口
     s.listen(1)  # 等待客户端连接
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
     a, addr = s.accept()  # 建立客户端连接
     return a
 
